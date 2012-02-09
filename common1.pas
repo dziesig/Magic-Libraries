@@ -32,8 +32,6 @@ uses
 
   procedure ReadBool( var F : TextFile; var Value : Boolean );
 
-  function X : Boolean;
-
   function RectToOrigin( Rect : TRect ) : TRect;
 
 implementation
@@ -60,11 +58,6 @@ begin
     Result := 0
   else
     Result := StrToInt( Value );
-end;
-
-function X: Boolean;
-begin
-  Result := false;
 end;
 
 function RectToOrigin(Rect: TRect): TRect;
