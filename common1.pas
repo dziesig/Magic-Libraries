@@ -25,7 +25,7 @@ unit Common1;
 interface
 
 uses
-  Classes, SysUtils;
+  Classes, SysUtils, Graphics, Windows;
 
   function StringToFloat( Value : String ) : Extended;
   function StringToInt( Value : String ) : Integer;
@@ -33,6 +33,9 @@ uses
   procedure ReadBool( var F : TextFile; var Value : Boolean );
 
   function RectToOrigin( Rect : TRect ) : TRect;
+
+  procedure AngleTextOut(ACanvas: TCanvas; Angle, X, Y: Integer; Str: string);
+
 
 implementation
 
@@ -71,5 +74,19 @@ begin
   Result := R;
 end;
 
+procedure AngleTextOut(ACanvas: TCanvas; Angle, X, Y: Integer; Str: string);
+var
+  LogRec: TLogFont;
+  OldFontHandle,
+  NewFontHandle: hFont;
+begin
+  GetObject(ACanvas.Font.Handle, SizeOf(LogRec), Addr(LogRec));
+  LogRec.lfEscapement := Angle*10;
+  NewFontHandle := CreateFontIndirect(LogRec);
+  OldFontHandle := SelectObject(ACanvas.Handle, NewFontHandle);
+  ACanvas.TextOut(X, Y, Str);
+  NewFontHandle := SelectObject(ACanvas.Handle, OldFontHandle);
+  DeleteObject(NewFontHandle);
+end;
 end.
 
