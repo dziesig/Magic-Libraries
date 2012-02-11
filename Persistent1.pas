@@ -38,7 +38,6 @@ type
     fModified : Boolean;
     fName     : String;
     procedure Modify;
-    procedure UNMODIFY;  { LOOK HERE there are only a few places where this is valid }
     function  IsModified : Boolean; virtual;
     procedure SetName( Value : String );
   public
@@ -47,6 +46,8 @@ type
     procedure Save( var F : TextFile ); virtual;
     procedure Load( var F : TextFile ); virtual;
     procedure Assign( Source : TPersistentZ ); virtual;
+
+    procedure UNMODIFY;  { LOOK HERE there are only a few places where this is valid }
 
     procedure Update( var Data : Integer; NewValue : Integer ); overload;
     procedure Update( var Data : Double;  NewValue : Double );  overload;
