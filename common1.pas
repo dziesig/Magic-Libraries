@@ -36,6 +36,12 @@ uses
 
   procedure AngleTextOut(ACanvas: TCanvas; Angle, X, Y: Integer; Str: string);
 
+  function Min( V0, V1 : Double ) : Double; overload;
+  function Min( V0, V1 : Integer ) : Integer; overload;
+  function Max( V0, V1 : Double ) : Double; overload;
+  function Max( V0, V1 : Integer ) : Integer; overload;
+
+
 
 implementation
 
@@ -88,5 +94,38 @@ begin
   NewFontHandle := SelectObject(ACanvas.Handle, OldFontHandle);
   DeleteObject(NewFontHandle);
 end;
+
+function Min(V0, V1: Double): Double;
+begin
+  if V0 < V1 then
+    Result := V0
+  else
+    Result := V1;
+end;
+
+function Min(V0, V1: Integer): Integer;
+begin
+  if V0 < V1 then
+    Result := V0
+  else
+    Result := V1;
+end;
+
+function Max(V0, V1: Double): Double;
+begin
+  if V0 > V1 then
+    Result := V0
+  else
+    Result := V1;
+end;
+
+function Max(V0, V1: Integer): Integer;
+begin
+  if V0 > V1 then
+    Result := V0
+  else
+    Result := V1;
+end;
+
 end.
 
