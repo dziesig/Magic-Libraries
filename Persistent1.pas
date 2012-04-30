@@ -47,6 +47,8 @@ type
     procedure Load( var F : TextFile ); virtual;
     procedure Assign( Source : TPersistentZ ); virtual;
 
+    procedure UNMODIFY;  { LOOK HERE there are only a few places where this is valid }
+
     procedure Update( var Data : Integer; NewValue : Integer ); overload;
     procedure Update( var Data : Double;  NewValue : Double );  overload;
     procedure Update( var Data : String;  NewValue : String );  overload;
@@ -75,7 +77,7 @@ type
     function  GetItem( Index : Integer ) : Pointer;
 
   public
-    constructor  Create( aParent : TPersistentZ = nil); override;
+    constructor  Create( aParent : TPersistentZ = nil ); override;
     destructor   Destroy; override;
     function     Add( Item : Pointer) : Integer;   overload;
     procedure    Clear; virtual;
