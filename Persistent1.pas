@@ -47,8 +47,6 @@ type
     procedure Load( var F : TextFile ); virtual;
     procedure Assign( Source : TPersistentZ ); virtual;
 
-    procedure UNMODIFY;  { LOOK HERE there are only a few places where this is valid }
-
     procedure Update( var Data : Integer; NewValue : Integer ); overload;
     procedure Update( var Data : Double;  NewValue : Double );  overload;
     procedure Update( var Data : String;  NewValue : String );  overload;
@@ -123,6 +121,7 @@ end;
 
 constructor TPersistentZ.Create(aParent: TPersistentZ);
 begin
+  inherited;
   fParent := aParent;
 end;
 

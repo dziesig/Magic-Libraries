@@ -38,7 +38,6 @@ type
     fModified : Boolean;
     fName     : String;
     procedure Modify;
-    procedure UNMODIFY;  { LOOK HERE there are only a few places where this is valid }
     function  IsModified : Boolean; virtual;
     procedure SetName( Value : String );
   public
@@ -52,6 +51,8 @@ type
     procedure Update( var Data : Double;  NewValue : Double );  overload;
     procedure Update( var Data : String;  NewValue : String );  overload;
     procedure Update( var Data : Boolean; NewValue : Boolean );  overload;
+
+    procedure UNMODIFY;  { LOOK HERE there are only a few places where this is valid }
 
     property Modified : Boolean read IsModified;
     property Parent : TPersistentZ read fParent write fParent;
@@ -74,7 +75,7 @@ type
     function  GetItem( Index : Integer ) : Pointer;
 
   public
-    constructor  Create( aParent : TPersistentZ = nil); override;
+    constructor  Create( aParent : TPersistentZ = nil ); override;
     destructor   Destroy; override;
     function     Add( Item : Pointer) : Integer;   overload;
     procedure    Clear; virtual;
