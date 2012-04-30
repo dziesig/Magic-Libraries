@@ -75,7 +75,7 @@ type
     function  GetItem( Index : Integer ) : Pointer;
 
   public
-    constructor  Create( aParent : TPersistentZ = nil); override;
+    constructor  Create( aParent : TPersistentZ = nil ); override;
     destructor   Destroy; override;
     function     Add( Item : Pointer) : Integer;   overload;
     procedure    Clear; virtual;
