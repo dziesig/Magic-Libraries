@@ -11,7 +11,7 @@ object Form1: TForm1
   object Memo1: TMemo
     Left = 40
     Height = 66
-    Top = 32
+    Top = 56
     Width = 150
     Lines.Strings = (
       'Memo1'
@@ -21,11 +21,34 @@ object Form1: TForm1
   object Memo2: TMemo
     Left = 40
     Height = 66
-    Top = 120
+    Top = 148
     Width = 150
     Lines.Strings = (
       'Memo2'
     )
     TabOrder = 1
+  end
+  object LabeledEdit1: TLabeledEdit
+    Left = 40
+    Height = 21
+    Top = 21
+    Width = 80
+    EditLabel.AnchorSideLeft.Control = LabeledEdit1
+    EditLabel.AnchorSideBottom.Control = LabeledEdit1
+    EditLabel.Left = 40
+    EditLabel.Height = 14
+    EditLabel.Top = 4
+    EditLabel.Width = 55
+    EditLabel.Caption = 'Type Name'
+    EditLabel.ParentColor = False
+    TabOrder = 2
+  end
+  object SpeedButton1: TSpeedButton
+    Left = 136
+    Height = 22
+    Top = 21
+    Width = 23
+    NumGlyphs = 0
+    OnClick = Button1Click
   end
 end

@@ -2,6 +2,8 @@ unit ObjectFactory1;
 
 {$mode objfpc}{$H+}
 
+{$M+}
+
 interface
 
 uses
@@ -13,17 +15,17 @@ type
 
   { TMagicClass }
 
-  TMagicClass = class
- //   protected
-    public
-      fClass : TClass;
-    public
-      constructor Create( aClass : TClass );
-      function Name : String;
-//      property TheClass : TClass read fClass;
-  end;
-
-  TClassList = specialize TMagicList<TMagicClass>;
+//  TMagicClass = class
+// //   protected
+//    public
+//      fClass : TClass;
+//    public
+//      constructor Create( aClass : TClass );
+//      function Name : String;
+////      property TheClass : TClass read fClass;
+//  end;
+//
+//  TClassList = specialize TMagicList<TMagicClass>;
 
   { TObjectFactory }
 
@@ -31,12 +33,13 @@ type
   private
     function GetCount: Integer;
   protected
+    public
 //    fClassList : TClassList;
     fClassList : array of TClass;
   public
     constructor Create;
     procedure   RegisterClass( aClass : TClass );
-    function    MakeObject( aName : String ) : TPersists;
+    function    MakeObject( aName : String ) : TObject;
     property    Count : Integer read GetCount;
 //    property    ClassList : TClassList read fClassList;
   end;
@@ -48,8 +51,8 @@ implementation
 
 function CompareClassNames( Item1, Item2 : Pointer ) : Integer;
 begin
-  Result := CompareText(TMagicClass(Item2).Name,
-                           TMagicClass(Item1).Name) ;
+  //Result := CompareText(TMagicClass(Item2).Name,
+  //                         TMagicClass(Item1).Name) ;
 end;
 
 { TObjectFactory }
@@ -75,10 +78,10 @@ begin
   //fClassList.Sort( @CompareClassNames );
 end;
 
-function TObjectFactory.MakeObject(aName: String): TPersists;
+function TObjectFactory.MakeObject(aName: String): TObject;
 var
   I : Integer;
-  C : TMagicClass;
+//  C : TMagicClass;
   CC : TClass;
 begin
   for I := 0 to pred(Length(fClassList)) do
@@ -86,22 +89,22 @@ begin
       begin
         CC := fClassList[I];
        // CC := C.fClass;
-        Result := TPersists(CC.Create);
+        Result := fClassList[I].Create;
         exit;
       end;
 end;
 
 { TMagicClass }
 
-constructor TMagicClass.Create(aClass: TClass);
-begin
-  fClass := aClass;
-end;
-
-function TMagicClass.Name: String;
-begin
-  Result := fClass.ClassName;
-end;
+//constructor TMagicClass.Create(aClass: TClass);
+//begin
+//  fClass := aClass;
+//end;
+//
+//function TMagicClass.Name: String;
+//begin
+//  Result := fClass.ClassName;
+//end;
 
 initialization
   ObjectFactory := TObjectFactory.Create;
