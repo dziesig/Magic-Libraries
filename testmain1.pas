@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  ExtCtrls, Buttons,
+  ExtCtrls, Buttons, ComCtrls, Menus, ActnList,
 
   Common1, Persists1, ObjectFactory2;
 
@@ -21,11 +21,22 @@ type
   { TForm1 }
 
   TForm1 = class(TForm)
+    FileExit: TAction;
+    ActionList1: TActionList;
+    Button1: TButton;
+    Label1: TLabel;
+    Label2: TLabel;
     LabeledEdit1: TLabeledEdit;
+    MainMenu1: TMainMenu;
     Memo1: TMemo;
     Memo2: TMemo;
-    SpeedButton1: TSpeedButton;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
     procedure Button1Click(Sender: TObject);
+    procedure FileExitExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
     { private declarations }
@@ -95,6 +106,11 @@ begin
   except
     Memo1.Lines.Add(LabeledEdit1.Text + ' not in Factory');
   end;
+end;
+
+procedure TForm1.FileExitExecute(Sender: TObject);
+begin
+  Close;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);

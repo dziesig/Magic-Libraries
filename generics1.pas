@@ -36,6 +36,7 @@ type
   private
     fCount : Integer;
     fList : array of T;
+    fSorted : Boolean;
 
     procedure CheckCount( Value : Integer );
 
@@ -67,6 +68,7 @@ type
     property     Capacity : Integer read GetCapacity write SetCapacity;
     property     Count    : Integer read fCount;
     property     Items[I : Integer] : T read GetItem write PutItem; default;
+    property     Sorted : Boolean read fSorted;
   end;
 
 
@@ -111,6 +113,7 @@ var
   I : Integer;
 begin
   inherited;
+  fSorted := False;
   fName := 'List';
   SetLength(fList,InitialListSize);
   for I := 0 to pred(InitialListSize) do
@@ -132,6 +135,7 @@ begin
   fList[fCount] := Item;
   Inc(fCount);
   Result := fCount;
+  fSorted := False;
   Modify;
 end;
 
@@ -140,6 +144,7 @@ begin
   { TODO 3 -oDon Z -cPossible memory leak : Free the contents of the list before clearing it. }
   SetLength( fList, 0);
   fCount := 0;
+  fSorted := False;
 end;
 
 procedure TMagicList.Delete(Index: Integer);
@@ -173,6 +178,7 @@ begin
   Temp := Items[Index1];
   Items[Index1] := Items[Index2];
   Items[Index2] := Temp;
+  fSorted := False;
   Modify;
 end;
 
@@ -246,6 +252,7 @@ begin
   for I := fCount-2 downto Index do
     Items[I+1] := Items[I];
   Items[Index] := Item;
+  fSorted := False;
   Modify;
 end;
 
@@ -269,6 +276,7 @@ begin
   P := Items[CurIndex];
   Delete(CurIndex);
   Insert(NewIndex,P);
+  fSorted := False;
   Modify;
 end;
 
@@ -310,6 +318,7 @@ begin
             end;
         end;
     end;
+  fSorted := true;
 end;
 
 end.

@@ -5,32 +5,40 @@ unit ObjectFactory2;
 interface
 
 uses
-  Classes, SysUtils;
+  Classes, SysUtils,
+
+  Generics1;
 
 type
 
-    { TMagicClass }
+  { TMagicClass }
 
-    TMagicClass = class
-      protected
-        fClass : TClass;
-      public
-        constructor Create( aClass : TClass );
-        function Name : String;
-        property TheClass : TClass read fClass;
-    end;
+  TMagicClass = class
+    protected
+      fClass : TClass;
+    public
+      constructor Create( aClass : TClass );
+      function Name : String;
+      property TheClass : TClass read fClass;
+  end;
 
-  //  TClassList = specialize TMagicList<TMagicClass>;
+  TClassList = specialize TMagicList<TMagicClass>;
 
   { TClassFactory }
 
-  TClassFactory = class
+  { TObjectFactory }
+
+  TObjectFactory = class
     private
-      ClassList : array of TMagicClass;
+      fClassList : TClassList;
+      function GetCount: Integer;
     public
       constructor Create;
       procedure RegisterClass( AClass : TClass );
       function  MakeObject( Name : String ): TObject;
+
+      property Count : Integer read GetCount;
+      property ClassList : TClassList read fClassList;
   end;
 
 implementation
@@ -38,28 +46,38 @@ implementation
 { TClassFactory }
 
 
-constructor TClassFactory.Create;
+constructor TObjectFactory.Create;
 begin
-  SetLength(ClassList,0);
+//  SetLength(ClassList,0);
+  fClassList := TClassList.Create;
 end;
 
-function TClassFactory.MakeObject(Name: String) : TObject;
+function TObjectFactory.GetCount: Integer;
+begin
+  Result := fClassList.Count;
+end;
+
+function TObjectFactory.MakeObject(Name: String) : TObject;
 var
   I : Integer;
 begin
-  for I := 0 to pred(Length(ClassList)) do
-    if ClassList[I].Name = Name then
-      begin
-        Result := ClassList[I].TheClass.Create;
-        exit;
-      end;
-  raise Exception.Create('Class ' + Name +' not found in Factory.');
+  I := ClassList.IndexOf( Name );
+  if I >= 0 then
+    Result := fClassList[I].TheClass.Create
+  else
+    raise Exception.Create('Class ' + Name +' not found in Factory.');
 end;
 
-procedure TClassFactory.RegisterClass(aClass: TClass);
+function CompareClassNames( Item1, Item2 : Pointer ) : Integer;
 begin
-  SetLength( ClassList, Length(ClassList) + 1 );
-  ClassList[Length(ClassList)-1] := TMagicClass.Create(aClass);
+  Result := CompareText(TMagicClass(Item2).Name,
+                           TMagicClass(Item1).Name) ;
+end;
+
+procedure TObjectFactory.RegisterClass(aClass: TClass);
+begin
+  fClasslist.Add( TMagicClass.Create(aClass) );
+  fClassList.Sort(@CompareClassNames)
 end;
 
 { TMagicClass }

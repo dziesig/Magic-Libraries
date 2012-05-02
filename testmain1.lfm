@@ -1,54 +1,105 @@
 object Form1: TForm1
-  Left = 905
-  Height = 240
-  Top = 412
-  Width = 320
+  Left = 349
+  Height = 438
+  Top = 190
+  Width = 708
   Caption = 'Form1'
-  ClientHeight = 240
-  ClientWidth = 320
+  ClientHeight = 418
+  ClientWidth = 708
+  Menu = MainMenu1
   OnCreate = FormCreate
   LCLVersion = '0.9.30.4'
-  object Memo1: TMemo
-    Left = 40
-    Height = 66
-    Top = 56
-    Width = 150
-    Lines.Strings = (
-      'Memo1'
-    )
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 418
+    Top = 0
+    Width = 708
+    ActivePage = TabSheet2
+    Align = alClient
+    TabIndex = 1
     TabOrder = 0
+    object TabSheet1: TTabSheet
+      Caption = 'Object Factory'
+      ClientHeight = 392
+      ClientWidth = 700
+      object LabeledEdit1: TLabeledEdit
+        Left = 40
+        Height = 21
+        Top = 197
+        Width = 60
+        EditLabel.AnchorSideLeft.Control = LabeledEdit1
+        EditLabel.AnchorSideBottom.Control = LabeledEdit1
+        EditLabel.Left = 40
+        EditLabel.Height = 14
+        EditLabel.Top = 180
+        EditLabel.Width = 55
+        EditLabel.Caption = 'Type Name'
+        EditLabel.ParentColor = False
+        TabOrder = 0
+      end
+      object Button1: TButton
+        Left = 115
+        Height = 25
+        Top = 193
+        Width = 75
+        Caption = 'Search'
+        OnClick = Button1Click
+        TabOrder = 1
+      end
+      object Memo1: TMemo
+        Left = 40
+        Height = 130
+        Top = 238
+        Width = 150
+        ScrollBars = ssAutoVertical
+        TabOrder = 2
+      end
+      object Memo2: TMemo
+        Left = 40
+        Height = 124
+        Top = 30
+        Width = 150
+        ScrollBars = ssAutoVertical
+        TabOrder = 3
+      end
+      object Label1: TLabel
+        Left = 44
+        Height = 14
+        Top = 15
+        Width = 89
+        Caption = 'Objects in Factory'
+        ParentColor = False
+      end
+      object Label2: TLabel
+        Left = 44
+        Height = 14
+        Top = 242
+        Width = 72
+        Caption = 'Search Results'
+        ParentColor = False
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'TabSheet2'
+    end
   end
-  object Memo2: TMemo
-    Left = 40
-    Height = 66
-    Top = 148
-    Width = 150
-    Lines.Strings = (
-      'Memo2'
-    )
-    TabOrder = 1
+  object MainMenu1: TMainMenu
+    left = 170
+    top = 14
+    object MenuItem1: TMenuItem
+      Caption = 'File'
+      object MenuItem2: TMenuItem
+        Action = FileExit
+      end
+    end
   end
-  object LabeledEdit1: TLabeledEdit
-    Left = 40
-    Height = 21
-    Top = 21
-    Width = 80
-    EditLabel.AnchorSideLeft.Control = LabeledEdit1
-    EditLabel.AnchorSideBottom.Control = LabeledEdit1
-    EditLabel.Left = 40
-    EditLabel.Height = 14
-    EditLabel.Top = 4
-    EditLabel.Width = 55
-    EditLabel.Caption = 'Type Name'
-    EditLabel.ParentColor = False
-    TabOrder = 2
-  end
-  object SpeedButton1: TSpeedButton
-    Left = 136
-    Height = 22
-    Top = 21
-    Width = 23
-    NumGlyphs = 0
-    OnClick = Button1Click
+  object ActionList1: TActionList
+    left = 334
+    top = 17
+    object FileExit: TAction
+      Category = 'File'
+      Caption = 'Exit'
+      OnExecute = FileExitExecute
+    end
   end
 end

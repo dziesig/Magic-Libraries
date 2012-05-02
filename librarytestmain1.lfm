@@ -1,0 +1,116 @@
+object Form1: TForm1
+  Left = 310
+  Height = 323
+  Top = 150
+  Width = 715
+  Caption = 'Form1'
+  ClientHeight = 303
+  ClientWidth = 715
+  Menu = MainMenu1
+  OnCreate = FormCreate
+  LCLVersion = '0.9.30.4'
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 303
+    Top = 0
+    Width = 715
+    ActivePage = TabSheet2
+    Align = alClient
+    Enabled = False
+    TabIndex = 1
+    TabOrder = 0
+    Visible = False
+    object TabSheet1: TTabSheet
+      Caption = 'Object Factory'
+      ClientHeight = 277
+      ClientWidth = 707
+      object Edit1: TEdit
+        Left = 188
+        Height = 21
+        Top = 34
+        Width = 80
+        TabOrder = 0
+      end
+      object Label2: TLabel
+        Left = 188
+        Height = 14
+        Top = 21
+        Width = 49
+        Caption = 'Find Class'
+        ParentColor = False
+      end
+      object Memo1: TMemo
+        Left = 20
+        Height = 222
+        Top = 34
+        Width = 150
+        OnClick = Memo1Click
+        TabOrder = 2
+        TabStop = False
+      end
+      object Label1: TLabel
+        Left = 20
+        Height = 14
+        Top = 21
+        Width = 88
+        Caption = 'Classes in Factory'
+        ParentColor = False
+      end
+      object Memo2: TMemo
+        Left = 284
+        Height = 222
+        Top = 34
+        Width = 150
+        TabOrder = 1
+        TabStop = False
+      end
+      object Label3: TLabel
+        Left = 284
+        Height = 14
+        Top = 21
+        Width = 72
+        Caption = 'Search Results'
+        ParentColor = False
+      end
+      object SpeedButton1: TSpeedButton
+        Left = 188
+        Height = 22
+        Top = 66
+        Width = 80
+        Caption = 'Search'
+        NumGlyphs = 0
+        OnClick = SpeedButton1Click
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'TabSheet2'
+    end
+  end
+  object MainMenu1: TMainMenu
+    left = 89
+    top = 48
+    object MenuItem1: TMenuItem
+      Caption = 'File'
+      object MenuItem3: TMenuItem
+        Action = FileRun
+      end
+      object MenuItem2: TMenuItem
+        Action = FileExit
+      end
+    end
+  end
+  object ActionList1: TActionList
+    left = 118
+    top = 48
+    object FileExit: TAction
+      Category = 'File'
+      Caption = 'Exit'
+      OnExecute = FileExitExecute
+    end
+    object FileRun: TAction
+      Category = 'File'
+      Caption = 'Run'
+      OnExecute = FileRunExecute
+    end
+  end
+end
