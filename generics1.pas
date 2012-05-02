@@ -65,6 +65,9 @@ type
     function     Remove( Item : T ) : Integer;
     procedure    Sort(Compare: TListSortCompare);
 
+    procedure    Save(var F : Text );
+    procedure    Load(var F : Text );
+
     property     Capacity : Integer read GetCapacity write SetCapacity;
     property     Count    : Integer read fCount;
     property     Items[I : Integer] : T read GetItem write PutItem; default;
@@ -319,6 +322,20 @@ begin
         end;
     end;
   fSorted := true;
+end;
+
+procedure TMagicList.Save(var F: TextFile);
+var
+  R, S : String;
+  Q : T;
+begin
+  R := Q.ClassName;
+  S := self.ClassName;
+end;
+
+procedure TMagicList.Load(var F: TextFile);
+begin
+
 end;
 
 end.

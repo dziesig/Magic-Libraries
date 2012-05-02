@@ -3,7 +3,7 @@ object Form1: TForm1
   Height = 323
   Top = 150
   Width = 715
-  Caption = 'Form1'
+  Caption = 'Magic Library Test'
   ClientHeight = 303
   ClientWidth = 715
   Menu = MainMenu1
@@ -83,7 +83,90 @@ object Form1: TForm1
       end
     end
     object TabSheet2: TTabSheet
-      Caption = 'TabSheet2'
+      Caption = 'Generic List of Strings'
+      ClientHeight = 277
+      ClientWidth = 707
+      object Memo3: TMemo
+        Left = 36
+        Height = 185
+        Top = 26
+        Width = 150
+        OnClick = Memo3Click
+        ScrollBars = ssAutoBoth
+        TabOrder = 0
+      end
+      object Button1: TButton
+        Left = 225
+        Height = 25
+        Top = 26
+        Width = 75
+        Caption = 'Clear'
+        OnClick = Button1Click
+        TabOrder = 1
+      end
+      object Button2: TButton
+        Left = 225
+        Height = 25
+        Top = 146
+        Width = 75
+        Caption = 'Sort'
+        OnClick = Button2Click
+        TabOrder = 2
+      end
+      object Button3: TButton
+        Left = 225
+        Height = 25
+        Top = 66
+        Width = 75
+        Caption = 'Move Down'
+        OnClick = Button3Click
+        TabOrder = 3
+      end
+      object Button4: TButton
+        Left = 225
+        Height = 25
+        Top = 186
+        Width = 75
+        Caption = 'Delete'
+        OnClick = Button4Click
+        TabOrder = 4
+      end
+      object Button5: TButton
+        Left = 36
+        Height = 25
+        Top = 234
+        Width = 150
+        Caption = 'Initial Test Set'
+        OnClick = Button5Click
+        TabOrder = 5
+      end
+      object Button6: TButton
+        Left = 225
+        Height = 25
+        Top = 106
+        Width = 75
+        Caption = 'Move Up'
+        OnClick = Button6Click
+        TabOrder = 6
+      end
+      object Button7: TButton
+        Left = 332
+        Height = 25
+        Top = 26
+        Width = 75
+        Caption = 'Save'
+        OnClick = Button7Click
+        TabOrder = 7
+      end
+      object Button8: TButton
+        Left = 332
+        Height = 25
+        Top = 66
+        Width = 75
+        Caption = 'Load'
+        OnClick = Button8Click
+        TabOrder = 8
+      end
     end
   end
   object MainMenu1: TMainMenu
@@ -112,5 +195,13 @@ object Form1: TForm1
       Caption = 'Run'
       OnExecute = FileRunExecute
     end
+  end
+  object OpenDialog1: TOpenDialog
+    left = 520
+    top = 48
+  end
+  object SaveDialog1: TSaveDialog
+    left = 520
+    top = 104
   end
 end

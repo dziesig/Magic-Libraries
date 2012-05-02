@@ -40,7 +40,7 @@ type
     procedure FormCreate(Sender: TObject);
   private
     { private declarations }
-    theFactory : TClassFactory;
+    theFactory : TObjectFactory;
     theObject : T1;
   public
     { public declarations }
@@ -121,7 +121,7 @@ var
   A : array [0..2] of T1;
 begin
   theObject := nil;
-  theFactory := TClassFactory.Create;
+  theFactory := TObjectFactory.Create;
   theFactory.RegisterClass(TX.ClassType);
   theFactory.RegisterClass(TY.ClassType);
   theFactory.RegisterClass(TZ.ClassType);
