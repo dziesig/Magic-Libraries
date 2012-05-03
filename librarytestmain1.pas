@@ -20,11 +20,7 @@ type
     constructor Create; virtual; abstract;
   end;
 
-  TMagicString = class(TPersists)
-
-  end;
-
-  TMagicStringList = specialize TMagicList<TMagicString>;
+  TMagicStringList = specialize TMagicList<TPersists>;
 
   { TForm1 }
 
@@ -224,7 +220,10 @@ var
 begin
   if SaveDialog1.Execute then
     begin
+      AssignFile(F,SaveDialog1.FileName);
+      Rewrite(F);
       theStringList.Save( F );
+      CloseFile(F);
     end;
 end;
 
@@ -302,12 +301,12 @@ end;
 procedure TForm1.LoadStringList;
 var
   I : Integer;
-  P : TMagicString;
+  P : TPersists;
 begin
   theStringList.Clear;
   for I := 0 to Memo3.Lines.Count - 1 do
     begin
-      P := TMagicString.Create;
+      P := TPersists.Create;
       P.Name := Memo3.Lines[I];
       theStringList.Add(P);
     end;

@@ -47,6 +47,7 @@ type
     procedure Save( var F : TextFile ); virtual;
     procedure Load( var F : TextFile ); virtual;
     procedure Assign( Source : TPersists ); virtual;
+    procedure AssignTo( Dest : TPersists ); virtual;
 
     procedure Update( var Data : Integer; NewValue : Integer ); overload;
     procedure Update( var Data : Double;  NewValue : Double );  overload;
@@ -84,6 +85,11 @@ begin
   fName   := Source.Name + '(copy)';
 end;
 
+procedure TPersists.AssignTo(Dest: TPersists);
+begin
+
+end;
+
 constructor TPersists.Create(aParent: TPersists);
 begin
   fParent := aParent;
@@ -95,7 +101,14 @@ begin
 end;
 
 procedure TPersists.Save( var F : TextFile );
+var
+  S : String;
 begin
+  inherited ;
+  S := self.ClassName;
+  Writeln(F,'<',S,'>');
+  Writeln(F,Name);
+  Writeln(F,'</',S,'>');
   fModified := false;
 end;
 

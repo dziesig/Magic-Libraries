@@ -65,8 +65,10 @@ type
     function     Remove( Item : T ) : Integer;
     procedure    Sort(Compare: TListSortCompare);
 
-    procedure    Save(var F : Text );
-    procedure    Load(var F : Text );
+    procedure    Save( var F : TextFile ); override;
+    procedure    Load( var F : TextFile ); override;
+    procedure    Assign( Source : T ); virtual;
+    procedure    AssignTo( Dest : T ); virtual;
 
     property     Capacity : Integer read GetCapacity write SetCapacity;
     property     Count    : Integer read fCount;
@@ -140,6 +142,16 @@ begin
   Result := fCount;
   fSorted := False;
   Modify;
+end;
+
+procedure TMagicList.Assign(Source: T);
+begin
+
+end;
+
+procedure TMagicList.AssignTo(Dest: T);
+begin
+
 end;
 
 procedure TMagicList.Clear;
@@ -272,6 +284,11 @@ begin
       end;
 end;
 
+procedure TMagicList.Load(var F: TextFile);
+begin
+  inherited Load(F);
+end;
+
 procedure TMagicList.Move(CurIndex, NewIndex: Integer);
 var
   P : T;
@@ -296,6 +313,21 @@ begin
       Modify;
     end;
 
+end;
+
+procedure TMagicList.Save(var F: TextFile);
+var
+  S : String;
+  I : Integer;
+begin
+  inherited Save(F);
+  S := self.ClassName;
+  Writeln(F,'<',S,'>');
+  Writeln(F,Count);
+  for I := 0 to pred(Count) do
+//    Writeln(F,'[',fList[I].ClassName,']');
+    fList[I].Save( F );
+  Writeln(F,'</',S,'>');
 end;
 
 procedure TMagicList.Sort(Compare: TListSortCompare);
@@ -324,19 +356,6 @@ begin
   fSorted := true;
 end;
 
-procedure TMagicList.Save(var F: TextFile);
-var
-  R, S : String;
-  Q : T;
-begin
-  R := Q.ClassName;
-  S := self.ClassName;
-end;
-
-procedure TMagicList.Load(var F: TextFile);
-begin
-
-end;
 
 end.
 
