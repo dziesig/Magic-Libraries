@@ -30,6 +30,8 @@ uses
 
 type
 
+  TObjectFactory = class;
+
   { TMagicList }
 
   generic TMagicList<T> = class(TPersists)
@@ -37,6 +39,7 @@ type
     fCount : Integer;
     fList : array of T;
     fSorted : Boolean;
+    fFactory : TObjectFactory;
 
     procedure CheckCount( Value : Integer );
 
@@ -81,6 +84,8 @@ implementation
 
 { TMagicList }
 
+uses
+  ObjectFactory2;
 
 procedure TMagicList.CheckCount(Value: Integer);
 begin
@@ -120,6 +125,7 @@ begin
   inherited;
   fSorted := False;
   fName := 'List';
+  fFactory := TObjectFactory.Create;
   SetLength(fList,InitialListSize);
   for I := 0 to pred(InitialListSize) do
     if fList[i] <> nil then
@@ -326,7 +332,7 @@ begin
   Writeln(F,Count);
   for I := 0 to pred(Count) do
 //    Writeln(F,'[',fList[I].ClassName,']');
-    fList[I].Save( F );
+    TPersists(fList[I]).Save( F );
   Writeln(F,'</',S,'>');
 end;
 
