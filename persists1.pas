@@ -43,6 +43,7 @@ type
     procedure SetName( Value : String );
   public
     constructor Create( aParent : TPersists = nil); virtual;
+    constructor Create( aParent : TPersists; var F : TextFile; TypeName : String ); virtual;
     procedure MakeNew; virtual;
     procedure Save( var F : TextFile ); virtual;
     procedure Load( var F : TextFile ); virtual;

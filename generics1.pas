@@ -30,8 +30,6 @@ uses
 
 type
 
-  TObjectFactory = class;
-
   { TMagicList }
 
   generic TMagicList<T> = class(TPersists)
@@ -39,7 +37,6 @@ type
     fCount : Integer;
     fList : array of T;
     fSorted : Boolean;
-    fFactory : TObjectFactory;
 
     procedure CheckCount( Value : Integer );
 
@@ -84,9 +81,6 @@ implementation
 
 { TMagicList }
 
-uses
-  ObjectFactory2;
-
 procedure TMagicList.CheckCount(Value: Integer);
 begin
   if (Value < 0) or (Value >= fCount) then
@@ -125,7 +119,7 @@ begin
   inherited;
   fSorted := False;
   fName := 'List';
-  fFactory := TObjectFactory.Create;
+
   SetLength(fList,InitialListSize);
   for I := 0 to pred(InitialListSize) do
     if fList[i] <> nil then
@@ -290,10 +284,37 @@ begin
       end;
 end;
 
-procedure TMagicList.Load(var F: TextFile);
+procedure TMagicList.Load(var F: TextFile );
+var
+  C : String;
+  S : String;
+  V : Integer;
+  I : Integer;
+  Num : Integer;
 begin
-  inherited Load(F);
+//  inherited Load(F);
+  C := self.ClassName;
+  Clear;
+  Readln( F, S );
+  if S <> '<' + C + '>' then
+    raise Exception.Create( 'TMagicList.Load Start error ' + S );
+  Readln( F, Num );
+  for I := 0 to pred(Num) do
+    begin
+
+    end;
+  Readln( F, S );
+  if S <> '</' + C + '>' then
+    raise Exception.Create( 'TMagicList.Load End error ' + S );
 end;
+
+//function TMagicList.LoadItem(var F: TextFile; TypeName: String): T;
+//var
+//  S : String;
+//begin
+//  Readln( F, S );
+//
+//end;
 
 procedure TMagicList.Move(CurIndex, NewIndex: Integer);
 var
@@ -326,12 +347,11 @@ var
   S : String;
   I : Integer;
 begin
-  inherited Save(F);
+//  inherited Save(F);
   S := self.ClassName;
   Writeln(F,'<',S,'>');
   Writeln(F,Count);
   for I := 0 to pred(Count) do
-//    Writeln(F,'[',fList[I].ClassName,']');
     TPersists(fList[I]).Save( F );
   Writeln(F,'</',S,'>');
 end;

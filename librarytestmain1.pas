@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, Menus,
   ActnList, ComCtrls, StdCtrls, Buttons,
 
-  Persists1, ObjectFactory2, Generics1;
+  Persists1, ObjectFactory1, Generics1;
 
 type
 
@@ -18,6 +18,8 @@ type
   public
     data : String;
     constructor Create; virtual; abstract;
+    function Show : String;
+    function X : String; virtual; abstract;
   end;
 
   TMagicStringList = specialize TMagicList<TPersists>;
@@ -69,7 +71,6 @@ type
     procedure SpeedButton1Click(Sender: TObject);
   private
     { private declarations }
-    theFactory : TObjectFactory;
     theObject : T1;
     theStringList : TMagicStringList;
 
@@ -88,27 +89,42 @@ type
 
   TX = class(T1)
     constructor Create; override;
+    function X : String; override;
   end;
 
   { TY }
 
   TY = class(T1)
     constructor Create; override;
+    function X : String; override;
   end;
 
   { TZ }
 
   TZ = class(T1)
     constructor Create; override;
+    function X : String; override;
   end;
 
 implementation
+
+{ T1 }
+
+function T1.Show: String;
+begin
+  Result := Data;
+end;
 
 { TZ }
 
 constructor TZ.Create;
 begin
   data := 'Lastly, TZ!';
+end;
+
+function TZ.X: String;
+begin
+  Result:='TZ.X';
 end;
 
 { TY }
@@ -118,11 +134,21 @@ begin
   data := 'This is TY';
 end;
 
+function TY.X: String;
+begin
+  Result:='TY.X';
+end;
+
 { TX }
 
 constructor TX.Create;
 begin
   data := 'Wow look at TX';
+end;
+
+function TX.X: String;
+begin
+  Result:='TX.X';
 end;
 
 {$R *.lfm}
@@ -132,6 +158,7 @@ begin
   Result := CompareText(TPersists(Item2).Name,
                            TPersists(Item1).Name) ;
 end;
+
 { TForm1 }
 
 procedure TForm1.FileExitExecute(Sender: TObject);
@@ -228,10 +255,18 @@ begin
 end;
 
 procedure TForm1.Button8Click(Sender: TObject);
+var
+  F : TextFile;
 begin
   if OpenDialog1.Execute then
     begin
+      AssignFile(F,OpenDialog1.FileName);
+      Reset(F);
+      theStringList.Load( F );
+      CloseFile(F);
 
+      Memo3.Clear;
+      LoadStringList;
     end;
 end;
 
@@ -244,24 +279,25 @@ end;
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   theObject := nil;
-  theFactory := TObjectFactory.Create;
-  theFactory.RegisterClass(TZ.ClassType);
-  theFactory.RegisterClass(TX.ClassType);
-  theFactory.RegisterClass(TY.ClassType);
+//  theFactory := TObjectFactory.Create;
+  ObjectFactory.RegisterClass(TZ.ClassType);
+  ObjectFactory.RegisterClass(TX.ClassType);
+  ObjectFactory.RegisterClass(TY.ClassType);
+  ObjectFactory.RegisterClass(TMagicStringList.ClassType);
+  ObjectFactory.RegisterClass(TPersists.ClassType);
   theStringList := TMagicStringList.Create;
 end;
 
 procedure TForm1.Memo1Click(Sender: TObject);
 var
   I : Integer;
-  anObject : TMagicClass;
+//  anObject : TMagicClass;
 begin
-  anObject := nil;
   Memo1.Lines.Clear;
-  for I := 0 to pred(theFactory.Count) do
+  for I := 0 to pred(ObjectFactory.Count) do
     begin
-      anObject := theFactory.ClassList.Items[I];
-      Memo1.Lines.Add(anObject.Name);
+//      anObject := ObjectFactory.ClassList[I].ClassName;
+      Memo1.Lines.Add(ObjectFactory.ClassList[I].ClassName);
     end;
 end;
 
@@ -279,8 +315,8 @@ begin
   if theObject <> nil then
     theObject.Free;
   try
-    theObject := T1(theFactory.MakeObject(Edit1.Text)).Create;
-    Memo2.Lines.Add(theObject.data);
+    theObject := T1(ObjectFactory.MakeObject(Edit1.Text)).Create;
+    Memo2.Lines.Add(theObject.X);
   except
     Memo2.Lines.Add(Edit1.Text + ' not in Factory');
   end;
