@@ -26,7 +26,7 @@ interface
 uses
   Classes, SysUtils,
 
-  Persists1;
+  Persists1, TextIO1;
 
 type
 
@@ -67,6 +67,9 @@ type
 
     procedure    Save( var F : TextFile ); override;
     procedure    Load( var F : TextFile ); override;
+    procedure    Save( TextIO : TTextIO ); override;
+    procedure    Load( TextIO : TTextIO ); override;
+
     procedure    Assign( Source : T ); virtual;
     procedure    AssignTo( Dest : T ); virtual;
 
@@ -306,6 +309,16 @@ begin
   Readln( F, S );
   if S <> '</' + C + '>' then
     raise Exception.Create( 'TMagicList.Load End error ' + S );
+end;
+
+procedure TMagicList.Save(TextIO: TTextIO);
+begin
+  inherited Save(TextIO);
+end;
+
+procedure TMagicList.Load(TextIO: TTextIO);
+begin
+
 end;
 
 //function TMagicList.LoadItem(var F: TextFile; TypeName: String): T;

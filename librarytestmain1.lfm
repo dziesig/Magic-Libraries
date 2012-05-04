@@ -168,6 +168,19 @@ object Form1: TForm1
         TabOrder = 8
       end
     end
+    object TabSheet3: TTabSheet
+      Caption = 'File Contents'
+      ClientHeight = 277
+      ClientWidth = 707
+      object Memo4: TMemo
+        Left = 132
+        Height = 250
+        Top = 18
+        Width = 278
+        ScrollBars = ssAutoBoth
+        TabOrder = 0
+      end
+    end
   end
   object MainMenu1: TMainMenu
     left = 89

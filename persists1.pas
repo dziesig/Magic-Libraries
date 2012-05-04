@@ -43,10 +43,12 @@ type
     procedure SetName( Value : String );
   public
     constructor Create( aParent : TPersists = nil); virtual;
-    constructor Create( aParent : TPersists; var F : TextFile; TypeName : String ); virtual;
+//    constructor Create( aParent : TPersists; var F : TextFile; TypeName : String ); virtual;
     procedure MakeNew; virtual;
     procedure Save( var F : TextFile ); virtual;
     procedure Load( var F : TextFile ); virtual;
+    procedure Save( TextIO : TTextIO ); virtual;
+    procedure Load( TextIO : TTextIO ); virtual;
     procedure Assign( Source : TPersists ); virtual;
     procedure AssignTo( Dest : TPersists ); virtual;
 
@@ -135,6 +137,16 @@ end;
 procedure TPersists.Load( var F : TextFile );
 begin
   fModified := false;
+end;
+
+procedure TPersists.Save(TextIO: TTextIO);
+begin
+
+end;
+
+procedure TPersists.Load(TextIO: TTextIO);
+begin
+
 end;
 
 

@@ -46,6 +46,7 @@ type
     Memo1: TMemo;
     Memo2: TMemo;
     Memo3: TMemo;
+    Memo4: TMemo;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
@@ -55,6 +56,7 @@ type
     SpeedButton1: TSpeedButton;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
+    TabSheet3: TTabSheet;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -243,14 +245,14 @@ end;
 
 procedure TForm1.Button7Click(Sender: TObject);
 var
-  F : TextFile;
+  TextIO : TTextIO;
 begin
   if SaveDialog1.Execute then
     begin
-      AssignFile(F,SaveDialog1.FileName);
-      Rewrite(F);
-      theStringList.Save( F );
-      CloseFile(F);
+      TextIO := TTextIO.Create( SaveDialog1.FileName );
+      theStringList.Save( TextIO );
+      Memo4.Strings := TextIO.StringList;
+      TextIO.Free;
     end;
 end;
 
