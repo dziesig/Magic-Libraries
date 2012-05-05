@@ -33,8 +33,8 @@ type
     Button4: TButton;
     Button5: TButton;
     Button6: TButton;
-    Button7: TButton;
-    Button8: TButton;
+    SaveButton: TButton;
+    LoadButton: TButton;
     FileRun: TAction;
     Edit1: TEdit;
     FileExit: TAction;
@@ -63,8 +63,8 @@ type
     procedure Button4Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
-    procedure Button7Click(Sender: TObject);
-    procedure Button8Click(Sender: TObject);
+    procedure SaveButtonClick(Sender: TObject);
+    procedure LoadButtonClick(Sender: TObject);
     procedure FileExitExecute(Sender: TObject);
     procedure FileRunExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -109,6 +109,9 @@ type
   end;
 
 implementation
+
+uses
+  TextIO1;
 
 { T1 }
 
@@ -243,32 +246,31 @@ begin
     end;
 end;
 
-procedure TForm1.Button7Click(Sender: TObject);
+procedure TForm1.SaveButtonClick(Sender: TObject);
 var
   TextIO : TTextIO;
 begin
   if SaveDialog1.Execute then
     begin
-      TextIO := TTextIO.Create( SaveDialog1.FileName );
+      TextIO := TTextIO.Create( SaveDialog1.FileName, true );
       theStringList.Save( TextIO );
-      Memo4.Strings := TextIO.StringList;
-      TextIO.Free;
+      Memo4.Lines := TextIO.StringList;
+      TextIO.Destroy;
     end;
 end;
 
-procedure TForm1.Button8Click(Sender: TObject);
+procedure TForm1.LoadButtonClick(Sender: TObject);
 var
-  F : TextFile;
+  TextIO : TTextIO;
 begin
   if OpenDialog1.Execute then
     begin
-      AssignFile(F,OpenDialog1.FileName);
-      Reset(F);
-      theStringList.Load( F );
-      CloseFile(F);
-
+      TextIO := TTextIO.Create( OpenDialog1.FileName, false );
+      theStringList.Load( TextIO );
+      Memo4.Lines := TextIO.StringList;
+      TextIO.Free;
       Memo3.Clear;
-      LoadStringList;
+      ShowStringList;
     end;
 end;
 

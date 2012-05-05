@@ -149,22 +149,22 @@ object Form1: TForm1
         OnClick = Button6Click
         TabOrder = 6
       end
-      object Button7: TButton
+      object SaveButton: TButton
         Left = 332
         Height = 25
         Top = 26
         Width = 75
         Caption = 'Save'
-        OnClick = Button7Click
+        OnClick = SaveButtonClick
         TabOrder = 7
       end
-      object Button8: TButton
+      object LoadButton: TButton
         Left = 332
         Height = 25
         Top = 66
         Width = 75
         Caption = 'Load'
-        OnClick = Button8Click
+        OnClick = LoadButtonClick
         TabOrder = 8
       end
     end

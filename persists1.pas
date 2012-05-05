@@ -26,7 +26,9 @@ unit persists1;
 interface
 
 uses
-  Classes, SysUtils; 
+  Classes, SysUtils,
+
+  TextIO1;
 
 type
 
@@ -35,18 +37,18 @@ type
   TPersists = class
   private
     fParent   : TPersists;
+    procedure SetModified(const AValue: Boolean);
   protected
     fModified : Boolean;
     fName     : String;
     procedure Modify;
     function  IsModified : Boolean; virtual;
     procedure SetName( Value : String );
+    procedure CheckStartClass( FileClass, ExpectedClass : String );
+    procedure CheckEndClass( FileClass, ExpectedClass : String );
   public
     constructor Create( aParent : TPersists = nil); virtual;
-//    constructor Create( aParent : TPersists; var F : TextFile; TypeName : String ); virtual;
     procedure MakeNew; virtual;
-    procedure Save( var F : TextFile ); virtual;
-    procedure Load( var F : TextFile ); virtual;
     procedure Save( TextIO : TTextIO ); virtual;
     procedure Load( TextIO : TTextIO ); virtual;
     procedure Assign( Source : TPersists ); virtual;
@@ -59,7 +61,7 @@ type
 
     procedure UNMODIFY;  { LOOK HERE there are only a few places where this is valid }
 
-    property Modified : Boolean read IsModified;
+    property Modified : Boolean read IsModified write SetModified;
     property Parent : TPersists read fParent write fParent;
     property Name   : String read fName write SetName;
   end;
@@ -68,18 +70,6 @@ implementation
 
 
 { TPersists }
-
-procedure TPersists.Modify;
-begin
-  fModified := true;
-  if fParent <> nil then
-    fParent.Modify;
-end;
-
-function TPersists.IsModified: Boolean;
-begin
-  Result := fModified;
-end;
 
 procedure TPersists.Assign(Source: TPersists);
 begin
@@ -90,7 +80,35 @@ end;
 
 procedure TPersists.AssignTo(Dest: TPersists);
 begin
+  Dest.fModified := False;
+  Dest.Parent := Parent;
+  Dest.fName := Name + '<copy>';
+end;
 
+procedure TPersists.CheckEndClass(FileClass, ExpectedClass: String);
+var
+  Cls : String;
+  Len : Integer;
+begin
+  Len := Length( FileClass );
+  Cls := Copy( FileClass,3,Len-3);
+  if (Copy( FileClass,1,2) <> '</') or (Copy( FileClass,Len,1) <> '>') then
+    raise Exception.Create('Invalid End of Class format [' + FileClass + ']');
+  if Cls <> ExpectedClass then
+    raise Exception.Create('End of Class mismatch.  ' + Cls + ' found, '+ ExpectedClass + ' expected');
+end;
+
+procedure TPersists.CheckStartClass(FileClass, ExpectedClass: String);
+var
+  Cls : String;
+  Len : Integer;
+begin
+  Len := Length( FileClass );
+  Cls := Copy( FileClass,2,Len-2);
+  if (Copy( FileClass,1,1) <> '<') or (Copy( FileClass,Len,1) <> '>') then
+    raise Exception.Create('Invalid Start of Class format [' + FileClass + ']');
+  if Cls <> ExpectedClass then
+    raise Exception.Create('Start of Class mismatch.  ' + Cls + ' found, '+ ExpectedClass + ' expected');
 end;
 
 constructor TPersists.Create(aParent: TPersists);
@@ -98,23 +116,56 @@ begin
   fParent := aParent;
 end;
 
+function TPersists.IsModified: Boolean;
+begin
+  Result := fModified;
+end;
+
+procedure TPersists.Load(TextIO: TTextIO);
+var
+  ClsName : String;
+  S       : String;
+begin
+  ClsName := self.ClassName;    // Get the expected class name
+  TextIO.ReadLn(S);             // Read the start of class
+  CheckStartClass(S,ClsName);   // Assert they are correct and of correct format
+  TextIO.Readln(S);             // Read the Object's Name
+  Name := S;
+  TextIO.Readln(S);             // Read the end of class
+  CheckEndClass(S,ClsName);     // Assert end of class is correct and of correct format
+  fModified := false;           // make sure this was NOT modified by the load.
+end;
+
 procedure TPersists.MakeNew;
 begin
   fModified := false;
 end;
 
-procedure TPersists.Save( var F : TextFile );
+procedure TPersists.Modify;
+begin
+  fModified := true;
+  if fParent <> nil then
+    fParent.Modify;
+end;
+
+procedure TPersists.Save(TextIO: TTextIO);
 var
   S : String;
 begin
-  inherited ;
-  S := self.ClassName;
-  Writeln(F,'<',S,'>');
-  Writeln(F,Name);
-  Writeln(F,'</',S,'>');
-  fModified := false;
+  S := self.ClassName;          // Get our class name
+  TextIO.Writeln('<'+S+'>');    // Write the start of class
+  TextIO.Writeln(Name);         // Write the Object's Name
+  TextIO.Writeln('</'+S+'>');   // Write the end of class
+  fModified := false;           // if it were modified, it isn't any more.
 end;
 
+procedure TPersists.SetModified(const AValue: Boolean);
+begin
+  fModified:=AValue;
+  if fModified then
+    if fParent <> nil then
+      fParent.Modify;
+end;
 
 procedure TPersists.SetName(Value: String);
 begin
@@ -130,41 +181,25 @@ end;
 
 procedure TPersists.Update(var Data: Boolean; NewValue: Boolean);
 begin
-  fModified := fModified or (Data <> NewValue);
+  Modified := fModified or (Data <> NewValue);
   Data := NewValue;
 end;
 
-procedure TPersists.Load( var F : TextFile );
-begin
-  fModified := false;
-end;
-
-procedure TPersists.Save(TextIO: TTextIO);
-begin
-
-end;
-
-procedure TPersists.Load(TextIO: TTextIO);
-begin
-
-end;
-
-
 procedure TPersists.Update(var Data: Integer; NewValue: Integer);
 begin
-  fModified := fModified or (Data <> NewValue);
+  Modified := fModified or (Data <> NewValue);
   Data := NewValue;
 end;
 
 procedure TPersists.Update(var Data: Double; NewValue: Double);
 begin
-  fModified := fModified or (Data <> NewValue);
+  Modified := fModified or (Data <> NewValue);
   Data := NewValue;
 end;
 
 procedure TPersists.Update(var Data: String; NewValue: String);
 begin
-  fModified := fModified or (Data <> NewValue);
+  Modified := fModified or (Data <> NewValue);
   Data := NewValue;
 end;
 

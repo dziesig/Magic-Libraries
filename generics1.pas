@@ -45,7 +45,8 @@ type
   protected
     procedure PutItem( Index : Integer; Item : T );
     function  GetItem( Index : Integer ) : T;
-
+    function  MakeItem( ItemName : String ) : T;
+    procedure DeleteItems;
   public
     constructor  Create( aParent : TPersists = nil ); override;
     destructor   Destroy; override;
@@ -65,8 +66,6 @@ type
     function     Remove( Item : T ) : Integer;
     procedure    Sort(Compare: TListSortCompare);
 
-    procedure    Save( var F : TextFile ); override;
-    procedure    Load( var F : TextFile ); override;
     procedure    Save( TextIO : TTextIO ); override;
     procedure    Load( TextIO : TTextIO ); override;
 
@@ -81,6 +80,9 @@ type
 
 
 implementation
+
+uses
+  ObjectFactory1;
 
 { TMagicList }
 
@@ -131,7 +133,8 @@ end;
 
 destructor TMagicList.Destroy;
 begin
-  { TODO 3 -oDon Z -cPossible memory leak; : Free the contents of the list before destroying it. }
+  { DONE 3 -oDon Z -cPossible memory leak; : Free the contents of the list before destroying it. }
+  DeleteItems;
   SetLength(fList,0);
   inherited Destroy;
 end;
@@ -149,17 +152,20 @@ end;
 
 procedure TMagicList.Assign(Source: T);
 begin
-
+{ TODO 1 -oDon Ziesig -cDevelopment : Implement this }
+  raise Exception.Create('NOT IMPLEMENTED');
 end;
 
 procedure TMagicList.AssignTo(Dest: T);
 begin
-
+  { TODO 1 -oDon Ziesig -cDevelopment : Implement this }
+  raise Exception.Create('NOT IMPLEMENTED');
 end;
 
 procedure TMagicList.Clear;
 begin
-  { TODO 3 -oDon Z -cPossible memory leak : Free the contents of the list before clearing it. }
+  { DONE 3 -oDon Z -cPossible memory leak : Free the contents of the list before clearing it. }
+  DeleteItems;
   SetLength( fList, 0);
   fCount := 0;
   fSorted := False;
@@ -170,6 +176,7 @@ var
   I : Integer;
 begin
   CheckCount(Index);
+  fList[Index].Free;
   for I := succ(Index) to pred(fCount) do
     fList[pred(I)] := fList[I];
   Dec(fCount);
@@ -187,6 +194,14 @@ begin
         Modify;
         break;
       end;
+end;
+
+procedure TMagicList.DeleteItems;
+var
+  I : Integer;
+begin
+  for I := 0 to pred(fCount) do
+    fList[I].Free;
 end;
 
 procedure TMagicList.Exchange(Index1, Index2: Integer);
@@ -287,47 +302,61 @@ begin
       end;
 end;
 
-procedure TMagicList.Load(var F: TextFile );
+procedure TMagicList.Save(TextIO: TTextIO);
 var
-  C : String;
+  S : String;
+  I : Integer;
+begin
+  S := self.ClassName;
+  TextIO.Writeln('<'+S+'>');
+  TextIO.Writeln(Count);
+  for I := 0 to pred(Count) do
+    TPersists(fList[I]).Save( TextIO );
+  TextIO.Writeln('</'+S+'>');
+end;
+
+procedure TMagicList.Load(TextIO: TTextIO);
+var
+  ClsName : String;
+  ItmType : String;
   S : String;
   V : Integer;
   I : Integer;
   Num : Integer;
+  Pos : Integer;
+  TObj : T;
 begin
-//  inherited Load(F);
-  C := self.ClassName;
   Clear;
-  Readln( F, S );
-  if S <> '<' + C + '>' then
-    raise Exception.Create( 'TMagicList.Load Start error ' + S );
-  Readln( F, Num );
+  ClsName := self.ClassName;
+  TextIO.ReadLn(S);
+  CheckStartClass(S,ClsName);
+  TextIO.ReadLn( Num );
   for I := 0 to pred(Num) do
     begin
-
+      Pos := TextIO.Readln( ItmType );
+      TObj := MakeItem( ItmType );
+      TextIo.GotoLine(Pos);
+      TObj.Load( TextIO );
+      TObj.Parent := Self;
+      Add( TObj );
     end;
-  Readln( F, S );
-  if S <> '</' + C + '>' then
-    raise Exception.Create( 'TMagicList.Load End error ' + S );
+  TextIO.ReadLn(S);
+  CheckEndClass(S,ClsName);
 end;
 
-procedure TMagicList.Save(TextIO: TTextIO);
+function TMagicList.MakeItem(ItemName: String): T;
+var
+  Nam  : String;
+  Len : Integer;
 begin
-  inherited Save(TextIO);
+  // Make sure the ItemName is of the form <Name>
+  if (ItemName[1] <> '<') or (ItemName[Length(ItemName)] <> '>') then
+    raise Exception.Create('Invalid Item Name ['+ItemName+']');
+  Len := Length( ItemName );
+  Nam := Copy( ItemName, 2, Len - 2 );
+  Result := TPersists(ObjectFactory.MakeObject( Nam ));
 end;
 
-procedure TMagicList.Load(TextIO: TTextIO);
-begin
-
-end;
-
-//function TMagicList.LoadItem(var F: TextFile; TypeName: String): T;
-//var
-//  S : String;
-//begin
-//  Readln( F, S );
-//
-//end;
 
 procedure TMagicList.Move(CurIndex, NewIndex: Integer);
 var
@@ -353,20 +382,6 @@ begin
       Modify;
     end;
 
-end;
-
-procedure TMagicList.Save(var F: TextFile);
-var
-  S : String;
-  I : Integer;
-begin
-//  inherited Save(F);
-  S := self.ClassName;
-  Writeln(F,'<',S,'>');
-  Writeln(F,Count);
-  for I := 0 to pred(Count) do
-    TPersists(fList[I]).Save( F );
-  Writeln(F,'</',S,'>');
 end;
 
 procedure TMagicList.Sort(Compare: TListSortCompare);

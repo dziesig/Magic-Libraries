@@ -26,9 +26,9 @@ type
       function    Readln( var Int  : Integer ) : Integer;
       function    Readln( var Dbl  : Double ) : Integer;
 
-      procedure   Writeln( var Line : String );
-      procedure   Writeln( var Int  : Integer );
-      procedure   Writeln( var Dbl  : Double );
+      procedure   Writeln( Line : String );
+      procedure   Writeln( Int  : Integer );
+      procedure   Writeln( Dbl  : Double );
 
       procedure   GotoLine( Line : Integer );
 
@@ -79,17 +79,17 @@ begin
   Inc(fLineNo);
 end;
 
-procedure TTextIO.Writeln(var Line: String);
+procedure TTextIO.Writeln(Line: String);
 begin
   fStringList.Add( Line );
 end;
 
-procedure TTextIO.Writeln(var Int: Integer);
+procedure TTextIO.Writeln(Int: Integer);
 begin
   fStringList.Add( IntToStr(Int) );
 end;
 
-procedure TTextIO.Writeln(var Dbl: Double);
+procedure TTextIO.Writeln(Dbl: Double);
 begin
   fStringList.Add( FloatToStr( Dbl ) );
 end;

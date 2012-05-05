@@ -65,6 +65,7 @@ begin
         Result := fClassList[I].Create.Create;
         exit;
       end;
+  raise Exception.Create(aName + ' not found in Object Factory');
 end;
 
 initialization
