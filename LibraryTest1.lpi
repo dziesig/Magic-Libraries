@@ -138,7 +138,7 @@
         <UsageCount Value="10"/>
       </Unit9>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="29" HistoryIndex="28">
       <Position1>
         <Filename Value="generics1.pas"/>
         <Caret Line="64" Column="2" TopLine="59"/>
@@ -248,17 +248,13 @@
         <Caret Line="49" Column="27" TopLine="38"/>
       </Position27>
       <Position28>
-        <Filename Value="generics1.pas"/>
-        <Caret Line="387" Column="1" TopLine="391"/>
+        <Filename Value="persists1.pas"/>
+        <Caret Line="107" Column="1" TopLine="95"/>
       </Position28>
       <Position29>
         <Filename Value="persists1.pas"/>
-        <Caret Line="107" Column="1" TopLine="95"/>
-      </Position29>
-      <Position30>
-        <Filename Value="persists1.pas"/>
         <Caret Line="133" Column="26" TopLine="125"/>
-      </Position30>
+      </Position29>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
@@ -283,16 +279,6 @@
     </Other>
   </CompilerOptions>
   <Debugging>
-    <BreakPoints Count="2">
-      <Item1>
-        <Source Value="persists1.pas"/>
-        <Line Value="109"/>
-      </Item1>
-      <Item2>
-        <Source Value="persists1.pas"/>
-        <Line Value="111"/>
-      </Item2>
-    </BreakPoints>
     <Watches Count="1">
       <Item1>
         <Expression Value="S"/>

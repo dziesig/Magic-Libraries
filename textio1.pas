@@ -25,10 +25,12 @@ type
       function    Readln( var Line : String ) : Integer;
       function    Readln( var Int  : Integer ) : Integer;
       function    Readln( var Dbl  : Double ) : Integer;
+      function    Readln( var Bool : Boolean ) : Integer;
 
       procedure   Writeln( Line : String );
       procedure   Writeln( Int  : Integer );
       procedure   Writeln( Dbl  : Double );
+      procedure   Writeln( Bool : Boolean );
 
       procedure   GotoLine( Line : Integer );
 
@@ -65,6 +67,17 @@ begin
   Inc(fLineNo);
 end;
 
+procedure TTextIO.Writeln(Bool: Boolean);
+var
+  Txt : String;
+begin
+  if Bool then
+    Txt := 'TRUE'
+  else
+    Txt := 'FALSE';
+  Writeln( Txt );
+end;
+
 function TTextIO.Readln(var Int: Integer): Integer;
 begin
   Result := fLineNo;
@@ -97,6 +110,15 @@ end;
 procedure TTextIO.GotoLine(Line: Integer);
 begin
   fLineNo := Line;
+end;
+
+function TTextIO.Readln(var Bool: Boolean): Integer;
+var
+  s : String;
+begin
+  Result := fLineNo;
+  Bool := fStringList.Strings[fLineNo] = 'TRUE';
+  Inc(fLineNo);
 end;
 
 end.

@@ -69,8 +69,8 @@ type
     procedure    Save( TextIO : TTextIO ); override;
     procedure    Load( TextIO : TTextIO ); override;
 
-    procedure    Assign( Source : T ); virtual;
-    procedure    AssignTo( Dest : T ); virtual;
+    procedure    Assign( Source : TPersists ); virtual;
+    procedure    AssignTo( Dest : TPersists ); virtual;
 
     property     Capacity : Integer read GetCapacity write SetCapacity;
     property     Count    : Integer read fCount;
@@ -354,7 +354,7 @@ begin
     raise Exception.Create('Invalid Item Name ['+ItemName+']');
   Len := Length( ItemName );
   Nam := Copy( ItemName, 2, Len - 2 );
-  Result := TPersists(ObjectFactory.MakeObject( Nam ));
+  Result := T(ObjectFactory.MakeObject( Nam ));
 end;
 
 
