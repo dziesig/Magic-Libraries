@@ -93,7 +93,7 @@ begin
   Len := Length( FileClass );
   Cls := Copy( FileClass,3,Len-3);
   if (Copy( FileClass,1,2) <> '</') or (Copy( FileClass,Len,1) <> '>') then
-    raise Exception.Create('Invalid End of Class format [' + FileClass + ']');
+    raise Exception.Create('Invalid End of Class format [' + FileClass + '], expecting ' + ExpectedClass);
   if Cls <> ExpectedClass then
     raise Exception.Create('End of Class mismatch.  ' + Cls + ' found, '+ ExpectedClass + ' expected');
 end;

@@ -303,12 +303,15 @@ begin
 end;
 
 procedure TMagicList.Save(TextIO: TTextIO);
+const
+  CurrentVersion = 1;
 var
   S : String;
   I : Integer;
 begin
   S := self.ClassName;
   TextIO.Writeln('<'+S+'>');
+  TextIO.WriteLn(CurrentVersion);
   TextIO.Writeln(Count);
   for I := 0 to pred(Count) do
     TPersists(fList[I]).Save( TextIO );
@@ -330,15 +333,19 @@ begin
   ClsName := self.ClassName;
   TextIO.ReadLn(S);
   CheckStartClass(S,ClsName);
-  TextIO.ReadLn( Num );
-  for I := 0 to pred(Num) do
+  TextIO.ReadLn( V );
+  if V >= 1 then
     begin
-      Pos := TextIO.Readln( ItmType );
-      TObj := MakeItem( ItmType );
-      TextIo.GotoLine(Pos);
-      TObj.Load( TextIO );
-      TObj.Parent := Self;
-      Add( TObj );
+      TextIO.ReadLn( Num );
+      for I := 0 to pred(Num) do
+        begin
+          Pos := TextIO.Readln( ItmType );
+          TObj := MakeItem( ItmType );
+          TextIo.GotoLine(Pos);
+          TObj.Load( TextIO );
+          TObj.Parent := Self;
+          Add( TObj );
+        end;
     end;
   TextIO.ReadLn(S);
   CheckEndClass(S,ClsName);
