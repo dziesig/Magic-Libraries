@@ -1,0 +1,123 @@
+object Form1: TForm1
+  Left = 279
+  Height = 365
+  Top = 105
+  Width = 504
+  Caption = 'Form1'
+  ClientHeight = 345
+  ClientWidth = 504
+  Menu = MainMenu1
+  OnCreate = FormCreate
+  LCLVersion = '0.9.30.4'
+  object RadioGroup1: TRadioGroup
+    Left = 280
+    Height = 201
+    Top = 32
+    Width = 185
+    AutoFill = True
+    Caption = 'Read Object'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.TopBottomSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 183
+    ClientWidth = 181
+    ItemIndex = 1
+    Items.Strings = (
+      'Drawing Object'
+      '3 Point'
+      'Line'
+      'Cube'
+      'Layer'
+      'Layers'
+    )
+    TabOrder = 0
+  end
+  object Memo1: TMemo
+    Left = 24
+    Height = 282
+    Top = 48
+    Width = 240
+    TabOrder = 1
+  end
+  object Label1: TLabel
+    Left = 24
+    Height = 14
+    Top = 32
+    Width = 24
+    Caption = 'Data'
+    ParentColor = False
+  end
+  object ReadButton: TButton
+    Left = 280
+    Height = 25
+    Top = 240
+    Width = 75
+    Caption = 'Read'
+    OnClick = ReadButtonClick
+    TabOrder = 2
+  end
+  object WriteButton: TButton
+    Left = 390
+    Height = 25
+    Top = 240
+    Width = 75
+    Caption = 'Write'
+    OnClick = WriteButtonClick
+    TabOrder = 3
+  end
+  object ActionList1: TActionList
+    left = 176
+    object Open: TAction
+      Category = 'File'
+      Caption = 'Open ...'
+      OnExecute = OpenExecute
+    end
+    object Save: TAction
+      Category = 'File'
+      Caption = 'Save ...'
+      OnExecute = SaveExecute
+    end
+    object FileExit: TAction
+      Category = 'File'
+      Caption = 'Exit'
+      OnExecute = FileExitExecute
+    end
+    object FileNew: TAction
+      Category = 'File'
+      Caption = 'New'
+      OnExecute = FileNewExecute
+    end
+  end
+  object MainMenu1: TMainMenu
+    left = 128
+    object MenuItem1: TMenuItem
+      Caption = 'File'
+      object MenuItem6: TMenuItem
+        Action = FileNew
+      end
+      object MenuItem2: TMenuItem
+        Action = Open
+      end
+      object MenuItem3: TMenuItem
+        Action = Save
+      end
+      object MenuItem4: TMenuItem
+        Caption = '--------'
+      end
+      object MenuItem5: TMenuItem
+        Action = FileExit
+      end
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    left = 248
+  end
+  object SaveDialog1: TSaveDialog
+    left = 208
+  end
+end

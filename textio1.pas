@@ -5,7 +5,7 @@ unit TextIO1;
 interface
 
 uses
-  Classes, SysUtils;
+  Classes, SysUtils, StdCtrls;
 
 type
 
@@ -13,14 +13,16 @@ type
 
   TTextIO = class
     private
-      fStringList : TStringList;
-      write       : Boolean;
-      opened      : Boolean;
-      fPath       : String;
+      fMemo       : TMemo;
       fLineNo     : Integer;
     public
-      constructor Create( FilePath : String; WriteMode : Boolean );
+
+      constructor Create( Memo : TMemo );
       destructor  Destroy;
+
+      procedure   Clear;
+      procedure   Load( Path : String );
+      procedure   Save( Path : String );
 
       function    Readln( var Line : String ) : Integer;
       function    Readln( var Int  : Integer ) : Integer;
@@ -34,36 +36,43 @@ type
 
       procedure   GotoLine( Line : Integer );
 
-      property    StringList : TStringList read fStringList;
+//      property    StringList : TStrings read fStringList;
   end;
 
 implementation
 
 { TTextIO }
 
-constructor TTextIO.Create(FilePath: String; WriteMode: Boolean);
+constructor TTextIO.Create(Memo: TMemo);
 begin
-  fPath := FilePath;
-  write := WriteMode;
-  fstringList := tStringList.Create;
-  if not write then
-    begin
-      fstringList.LoadFromFile( fPath );
-    end;
-  fLineNo := 0;
+  fMemo := Memo;
 end;
 
 destructor TTextIO.Destroy;
 begin
-  if write then
-    fStringList.SaveToFile( fPath );
-  fStringList.Free;
+
+end;
+
+procedure TTextIO.Clear;
+begin
+  fMemo.Clear;
+end;
+
+procedure TTextIO.Load(Path: String);
+begin
+  fMemo.Clear;
+  fMemo.Lines.LoadFromFile( Path );
+end;
+
+procedure TTextIO.Save(Path: String);
+begin
+  fMemo.Lines.SaveToFile( Path );
 end;
 
 function TTextIO.Readln(var Line: String): Integer;
 begin
   Result := fLineNo;
-  Line := fStringList.Strings[fLineNo];
+  Line := fMemo.Lines[fLineNo];
   Inc(fLineNo);
 end;
 
@@ -81,30 +90,30 @@ end;
 function TTextIO.Readln(var Int: Integer): Integer;
 begin
   Result := fLineNo;
-  Int := StrToInt(fStringList.Strings[fLineNo]);
+  Int := StrToInt(fMemo.Lines[fLineNo]);
   Inc(fLineNo);
 end;
 
 function TTextIO.Readln(var Dbl: Double): Integer;
 begin
   Result := fLineNo;
-  Dbl := StrToFloat(fStringList.Strings[fLineNo]);
+  Dbl := StrToFloat(fMemo.Lines[fLineNo]);
   Inc(fLineNo);
 end;
 
 procedure TTextIO.Writeln(Line: String);
 begin
-  fStringList.Add( Line );
+  fMemo.Lines.Add( Line );
 end;
 
 procedure TTextIO.Writeln(Int: Integer);
 begin
-  fStringList.Add( IntToStr(Int) );
+  fMemo.Lines.Add( IntToStr(Int) );
 end;
 
 procedure TTextIO.Writeln(Dbl: Double);
 begin
-  fStringList.Add( FloatToStr( Dbl ) );
+  fMemo.Lines.Add( FloatToStr( Dbl ) );
 end;
 
 procedure TTextIO.GotoLine(Line: Integer);
@@ -117,7 +126,7 @@ var
   s : String;
 begin
   Result := fLineNo;
-  Bool := fStringList.Strings[fLineNo] = 'TRUE';
+  Bool := fMemo.Lines[fLineNo] = 'TRUE';
   Inc(fLineNo);
 end;
 
