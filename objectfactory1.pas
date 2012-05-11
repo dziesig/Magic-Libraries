@@ -62,7 +62,7 @@ begin
   for I := 0 to pred(Length(fClassList)) do
     if fClassList[I].ClassName = aName then
       begin
-        Result := fClassList[I].Create.Create;
+        Result := fClassList[I].Create;//.Create;
         exit;
       end;
   raise Exception.Create(aName + ' not found in Object Factory');

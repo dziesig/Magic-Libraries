@@ -361,7 +361,7 @@ begin
     raise Exception.Create('Invalid Item Name ['+ItemName+']');
   Len := Length( ItemName );
   Nam := Copy( ItemName, 2, Len - 2 );
-  Result := T(ObjectFactory.MakeObject( Nam ));
+  Result := T(ObjectFactory.MakeObject( Nam )).Create;
 end;
 
 
