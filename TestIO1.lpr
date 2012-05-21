@@ -7,7 +7,8 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, TestIOMain1, persists1, TextIO1, generics1, ThreePoint1;
+  Forms, TestIOMain1, persists1, TextIO1, generics1, ThreePoint1,
+  DrawingObject1;
 
 {$R *.res}
 

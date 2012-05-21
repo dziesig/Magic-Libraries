@@ -51,6 +51,13 @@ type
     procedure WriteCube( TextIO : TTextIO );
     procedure WriteLayer( TextIO : TTextIO );
     procedure WriteLayers( TextIO : TTextIO );
+
+    procedure ReadDrawingObject( TextIO : TTextIO );
+    procedure ReadThreePoint( TextIO : TTextIO );
+    procedure ReadStraightLine( TextIO : TTextIO );
+    procedure ReadCube( TextIO : TTextIO );
+    procedure ReadLayer( TextIO : TTextIO );
+    procedure ReadLayers( TextIO : TTextIO );
   public
     { public declarations }
   end; 
@@ -93,7 +100,48 @@ end;
 
 procedure TForm1.ReadButtonClick(Sender: TObject);
 begin
+  case RadioGroup1.ItemIndex of
+    0: ReadDrawingObject( fTextIO );
+    1: ReadThreePoint( fTextIO );
+    2: ReadStraightLine( fTextIO );
+    3: ReadCube( fTextIO );
+    4: ReadLayer( fTextIO );
+    5: ReadLayers( fTextIO );
+  end;
+end;
 
+procedure TForm1.ReadCube(TextIO: TTextIO);
+begin
+
+end;
+
+procedure TForm1.ReadDrawingObject(TextIO: TTextIO);
+begin
+
+end;
+
+procedure TForm1.ReadLayer(TextIO: TTextIO);
+begin
+
+end;
+
+procedure TForm1.ReadLayers(TextIO: TTextIO);
+begin
+
+end;
+
+procedure TForm1.ReadStraightLine(TextIO: TTextIO);
+begin
+
+end;
+
+procedure TForm1.ReadThreePoint(TextIO: TTextIO);
+var
+  P : T3Point;
+begin
+  P := T3Point.Create;
+  P.Load( TextIO );
+  P.Destroy;
 end;
 
 procedure TForm1.SaveExecute(Sender: TObject);

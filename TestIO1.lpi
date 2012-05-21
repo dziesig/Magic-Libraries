@@ -34,12 +34,17 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="6">
+    <Units Count="13">
       <Unit0>
         <Filename Value="TestIO1.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="TestIO1"/>
-        <UsageCount Value="20"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="1"/>
+        <UsageCount Value="24"/>
+        <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="testiomain1.pas"/>
@@ -47,12 +52,11 @@
         <ComponentName Value="Form1"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="TestIOMain1"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="121"/>
-        <CursorPos X="12" Y="134"/>
-        <UsageCount Value="20"/>
+        <TopLine Value="1"/>
+        <CursorPos X="9" Y="143"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -60,167 +64,233 @@
         <Filename Value="persists1.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="persists1"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
         <TopLine Value="56"/>
         <CursorPos X="1" Y="1"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="textio1.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="TextIO1"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
         <TopLine Value="56"/>
         <CursorPos X="15" Y="58"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
         <Filename Value="generics1.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="generics1"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
         <TopLine Value="97"/>
         <CursorPos X="1" Y="1"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="..\MagicTracks\threepoint1.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ThreePoint1"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="73"/>
+        <TopLine Value="145"/>
         <CursorPos X="1" Y="1"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit5>
+      <Unit6>
+        <Filename Value="..\MagicTracks\drawingobject1.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="DrawingObject1"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="120"/>
+        <CursorPos X="3" Y="65"/>
+        <UsageCount Value="23"/>
+        <Loaded Value="True"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="..\MagicTracks\layers1.pas"/>
+        <UnitName Value="Layers1"/>
+        <EditorIndex Value="5"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="135"/>
+        <CursorPos X="1" Y="1"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="..\MagicTracks\Main1.pas"/>
+        <UnitName Value="Main1"/>
+        <EditorIndex Value="3"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="1"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="..\MagicTracks\straightline1.pas"/>
+        <UnitName Value="StraightLine1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="1"/>
+        <UsageCount Value="20"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="..\MagicTracks\drawingframe1.pas"/>
+        <UnitName Value="DrawingFrame1"/>
+        <EditorIndex Value="4"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="24"/>
+        <CursorPos X="27" Y="28"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="..\MagicTracks\drawingsetframe1.pas"/>
+        <UnitName Value="DrawingSetFrame1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="62"/>
+        <CursorPos X="1" Y="1"/>
+        <UsageCount Value="10"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="..\MagicTracks\internals1.pas"/>
+        <UnitName Value="Internals1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="1"/>
+        <UsageCount Value="10"/>
+      </Unit12>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="testiomain1.pas"/>
-        <Caret Line="66" Column="8" TopLine="40"/>
+        <Filename Value="textio1.pas"/>
+        <Caret Line="8" Column="30" TopLine="7"/>
       </Position1>
       <Position2>
-        <Filename Value="testiomain1.pas"/>
-        <Caret Line="61" Column="21" TopLine="55"/>
+        <Filename Value="textio1.pas"/>
+        <Caret Line="18" Column="29" TopLine="11"/>
       </Position2>
       <Position3>
         <Filename Value="testiomain1.pas"/>
-        <Caret Line="63" Column="21" TopLine="57"/>
+        <Caret Line="100" Column="25" TopLine="81"/>
       </Position3>
       <Position4>
         <Filename Value="testiomain1.pas"/>
-        <Caret Line="77" Column="3" TopLine="63"/>
+        <Caret Line="112" Column="30" TopLine="87"/>
       </Position4>
       <Position5>
         <Filename Value="testiomain1.pas"/>
-        <Caret Line="48" Column="27" TopLine="33"/>
+        <Caret Line="87" Column="1" TopLine="74"/>
       </Position5>
       <Position6>
-        <Filename Value="testiomain1.pas"/>
-        <Caret Line="43" Column="2" TopLine="34"/>
+        <Filename Value="textio1.pas"/>
+        <Caret Line="67" Column="1" TopLine="54"/>
       </Position6>
       <Position7>
         <Filename Value="textio1.pas"/>
-        <Caret Line="21" Column="3" TopLine="11"/>
+        <Caret Line="68" Column="1" TopLine="54"/>
       </Position7>
       <Position8>
         <Filename Value="testiomain1.pas"/>
-        <Caret Line="87" Column="7" TopLine="68"/>
+        <Caret Line="87" Column="1" TopLine="74"/>
       </Position8>
       <Position9>
         <Filename Value="textio1.pas"/>
-        <Caret Line="73" Column="34" TopLine="16"/>
+        <Caret Line="68" Column="1" TopLine="54"/>
       </Position9>
       <Position10>
-        <Filename Value="textio1.pas"/>
-        <Caret Line="8" Column="30" TopLine="7"/>
+        <Filename Value="testiomain1.pas"/>
+        <Caret Line="80" Column="35" TopLine="74"/>
       </Position10>
       <Position11>
         <Filename Value="textio1.pas"/>
-        <Caret Line="18" Column="29" TopLine="11"/>
+        <Caret Line="125" Column="16" TopLine="104"/>
       </Position11>
       <Position12>
-        <Filename Value="testiomain1.pas"/>
-        <Caret Line="100" Column="25" TopLine="81"/>
+        <Filename Value="textio1.pas"/>
+        <Caret Line="39" Column="3" TopLine="26"/>
       </Position12>
       <Position13>
-        <Filename Value="testiomain1.pas"/>
-        <Caret Line="112" Column="30" TopLine="87"/>
+        <Filename Value="textio1.pas"/>
+        <Caret Line="18" Column="1" TopLine="4"/>
       </Position13>
       <Position14>
-        <Filename Value="testiomain1.pas"/>
-        <Caret Line="87" Column="1" TopLine="74"/>
+        <Filename Value="textio1.pas"/>
+        <Caret Line="58" Column="15" TopLine="45"/>
       </Position14>
       <Position15>
         <Filename Value="textio1.pas"/>
-        <Caret Line="67" Column="1" TopLine="54"/>
+        <Caret Line="63" Column="15" TopLine="50"/>
       </Position15>
       <Position16>
         <Filename Value="textio1.pas"/>
-        <Caret Line="68" Column="1" TopLine="54"/>
+        <Caret Line="123" Column="22" TopLine="102"/>
       </Position16>
       <Position17>
-        <Filename Value="testiomain1.pas"/>
-        <Caret Line="87" Column="1" TopLine="74"/>
+        <Filename Value="textio1.pas"/>
+        <Caret Line="110" Column="14" TopLine="73"/>
       </Position17>
       <Position18>
         <Filename Value="textio1.pas"/>
-        <Caret Line="68" Column="1" TopLine="54"/>
+        <Caret Line="23" Column="25" TopLine="16"/>
       </Position18>
       <Position19>
         <Filename Value="testiomain1.pas"/>
-        <Caret Line="80" Column="35" TopLine="74"/>
+        <Caret Line="125" Column="16" TopLine="105"/>
       </Position19>
       <Position20>
-        <Filename Value="textio1.pas"/>
-        <Caret Line="125" Column="16" TopLine="104"/>
-      </Position20>
-      <Position21>
-        <Filename Value="textio1.pas"/>
-        <Caret Line="39" Column="3" TopLine="26"/>
-      </Position21>
-      <Position22>
-        <Filename Value="textio1.pas"/>
-        <Caret Line="18" Column="1" TopLine="4"/>
-      </Position22>
-      <Position23>
-        <Filename Value="textio1.pas"/>
-        <Caret Line="58" Column="15" TopLine="45"/>
-      </Position23>
-      <Position24>
-        <Filename Value="textio1.pas"/>
-        <Caret Line="63" Column="15" TopLine="50"/>
-      </Position24>
-      <Position25>
-        <Filename Value="textio1.pas"/>
-        <Caret Line="123" Column="22" TopLine="102"/>
-      </Position25>
-      <Position26>
-        <Filename Value="textio1.pas"/>
-        <Caret Line="110" Column="14" TopLine="73"/>
-      </Position26>
-      <Position27>
-        <Filename Value="textio1.pas"/>
-        <Caret Line="23" Column="25" TopLine="16"/>
-      </Position27>
-      <Position28>
-        <Filename Value="testiomain1.pas"/>
-        <Caret Line="125" Column="16" TopLine="105"/>
-      </Position28>
-      <Position29>
         <Filename Value="testiomain1.pas"/>
         <Caret Line="64" Column="15" TopLine="51"/>
-      </Position29>
-      <Position30>
+      </Position20>
+      <Position21>
         <Filename Value="testiomain1.pas"/>
         <Caret Line="131" Column="15" TopLine="119"/>
+      </Position21>
+      <Position22>
+        <Filename Value="testiomain1.pas"/>
+        <Caret Line="61" Column="1" TopLine="37"/>
+      </Position22>
+      <Position23>
+        <Filename Value="testiomain1.pas"/>
+        <Caret Line="55" Column="1" TopLine="40"/>
+      </Position23>
+      <Position24>
+        <Filename Value="testiomain1.pas"/>
+        <Caret Line="110" Column="1" TopLine="97"/>
+      </Position24>
+      <Position25>
+        <Filename Value="testiomain1.pas"/>
+        <Caret Line="144" Column="13" TopLine="122"/>
+      </Position25>
+      <Position26>
+        <Filename Value="..\MagicTracks\drawingobject1.pas"/>
+        <Caret Line="140" Column="48" TopLine="136"/>
+      </Position26>
+      <Position27>
+        <Filename Value="..\MagicTracks\drawingobject1.pas"/>
+        <Caret Line="326" Column="21" TopLine="319"/>
+      </Position27>
+      <Position28>
+        <Filename Value="..\MagicTracks\Main1.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position28>
+      <Position29>
+        <Filename Value="..\MagicTracks\drawingobject1.pas"/>
+        <Caret Line="140" Column="48" TopLine="120"/>
+      </Position29>
+      <Position30>
+        <Filename Value="..\MagicTracks\drawingobject1.pas"/>
+        <Caret Line="365" Column="1" TopLine="344"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>
@@ -247,6 +317,12 @@
     </Other>
   </CompilerOptions>
   <Debugging>
+    <BreakPoints Count="1">
+      <Item1>
+        <Source Value="testiomain1.pas"/>
+        <Line Value="144"/>
+      </Item1>
+    </BreakPoints>
     <Exceptions Count="3">
       <Item1>
         <Name Value="EAbort"/>
